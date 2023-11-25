@@ -17,12 +17,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Paginated Data Table',
+      title: 'Paginated DataGrid Example',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Paginated Data Table'),
+      home: const MyHomePage(title: 'Paginated DataGrid Example'),
     );
   }
 }
