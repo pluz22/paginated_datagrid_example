@@ -37,20 +37,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool loaded = true;
-
   PeopleDataSource peopleDataSource = PeopleDataSource();
 
   double pageCount = 1.0;
   int rowsPerPage = 10;
-  int currentPageIndex = -1;
 
   double calculatePageCount() {
     return (peopleDataSource.rows.length / rowsPerPage).ceilToDouble();
   }
 
   void updateRows() {
-    setState(() => loaded = false);
     rootBundle.loadString("assets/people.json").then(
       (response) {
         final List<dynamic> data = json.decode(response);
@@ -62,7 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
               .toList(),
         );
         pageCount = calculatePageCount();
-        loaded = true;
         setState(() {});
       },
     );
@@ -121,10 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
             pageCount: pageCount,
             delegate: peopleDataSource,
             onPageNavigationStart: (int pageIndex) {
-              if (currentPageIndex != pageIndex) {
-                currentPageIndex = pageIndex;
                 updateRows();
-              }
             },
             onRowsPerPageChanged: (int? rows) {
               rowsPerPage = rows ?? 10;
